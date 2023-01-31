@@ -1,11 +1,17 @@
-import css from '../Layout/Layout.module.css'
+import { Outlet } from "react-router-dom"
+import { StyledLink } from "./Layout.styled"
 
 
 export const Layout = () => {
     return (
-        <div className={css.layout}>
-            <p>Home</p>
-            <p>Movies</p>
-        </div>
+    <>
+      <header>
+        <nav >
+            <StyledLink to='/' >Home</StyledLink >
+            <StyledLink to='movies' >Movies</StyledLink >
+        </nav>
+      </header>
+      <Outlet/>
+    </>
     )
 }
