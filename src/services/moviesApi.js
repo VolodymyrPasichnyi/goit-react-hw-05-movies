@@ -10,8 +10,8 @@ export const trendingMovieApi = async () => {
         return data
 }     
 
-export const searchMovieApi = async () => {  
-      const { data } = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}`)
+export const searchMovieApi = async (query) => {  
+      const { data } = await axios.get(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
       return data
 } 
 
@@ -19,29 +19,3 @@ export const detailsMovieApi = async (movie_id) => {
       const { data } = await axios.get(`${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`)
       return data
 } 
-
-// export const creditsgMovieApi = async (movie_id) => {  
-//     try {
-//       const { data } = await BASE_URL.get(`/movie/${movie_id}/credits`, {
-//           params: {
-//             api_key: API_KEY,
-//           },
-//         })
-//         return data
-//     } catch (error) {
-//       console.error(error)
-//     }
-// } 
-
-// export const reviewsMovieApi = async (movie_id) => {  
-//     try {
-//       const { data } = await BASE_URL.get(`/movie/${movie_id}/reviews`, {
-//           params: {
-//             api_key: API_KEY,
-//           },
-//         })
-//         return data
-//     } catch (error) {
-//       console.error(error)
-//     }
-// } 
