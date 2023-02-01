@@ -1,10 +1,9 @@
 import { useState } from "react"
 import PropTypes from 'prop-types'
-import { toast } from 'react-toastify'
+import { toast } from "react-hot-toast"
 
 
-
-export const SearchBar = ({ onSubmit }) => {
+export const SearchBar = ({ formSubmit }) => {
      const [value, setValue] = useState('')
 
      const handleInputChange = (e) =>{
@@ -14,9 +13,9 @@ export const SearchBar = ({ onSubmit }) => {
      const handleSubmit = (e) => {
         e.preventDefault()
         if (value.trim() === '') {
-          toast.error()
+          return toast.error('Error')
         }
-        onSubmit(value)
+        formSubmit(value)
         setValue('')
      }
 
@@ -36,5 +35,5 @@ export const SearchBar = ({ onSubmit }) => {
 
 
 SearchBar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  formSubmit: PropTypes.func.isRequired,
 }

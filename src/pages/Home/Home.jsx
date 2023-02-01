@@ -1,20 +1,28 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { trendingMovieApi } from 'services/moviesApi'
 import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { toast } from "react-hot-toast"
+import { Loader } from 'components/Loader/Loader'
+
 
 
 export const Home = () => {
     const [movies, setMovies] = useState([])
+    const location = useLocation()
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+      setIsLoading(true);
       const trendingMovie = async () => {
         try {  
           const data = await trendingMovieApi()
           setMovies([...data.results])
         } catch (error) {
-          console.log(error)
-        } 
+          return toast.error('')
+        } finally {
+          setIsLoading(false)
+        }
       }
       trendingMovie()
     },[])
@@ -26,12 +34,13 @@ export const Home = () => {
           <ul>
           {movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>
+              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
                 {movie.title}
               </Link>
             </li>
         ))}
         </ul>
+        {isLoading && <Loader />}
         </div>
       </>
     )

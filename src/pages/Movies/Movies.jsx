@@ -5,41 +5,50 @@ import { useEffect } from "react"
 import { toast } from "react-hot-toast"
 import { useSearchParams } from "react-router-dom"
 import { searchMovieApi } from "services/moviesApi"
+import { Loader } from 'components/Loader/Loader'
+
+
 
 export const Movies = () => {
-    const [movies, setMovies] = useState(null)
+    const [recivedMovies, setRecivedMovies] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams()
-    const searchQuery = searchParams.get('query' ?? '')
-
-    const handleChange = (value) => {
-        setSearchParams({ query: value })
+    const searchQuery = searchParams.get('query') ?? ''
+    const [isLoading, setIsLoading] = useState(false)
+  
+    const handleSearchQueryChange = value => {
+      setSearchParams({ query: value })
     }
-
+  
     useEffect(() => {
-        if (searchQuery === '') {
-            return
+      if (searchQuery === '') {
+        return
+      }
+    const seerchMovie = async () => {
+        try {
+          setIsLoading(true)
+          const data = await searchMovieApi(searchQuery)
+          setRecivedMovies(data.results)
+          if (data.total_results === 0) {
+            return toast.error('No found movies')
+          }
+        } catch (error) {
+          toast.error(`${error.message}`)
+        } finally {
+          setIsLoading(false)
         }
-        const getMovies = async () => {
-            try {
-              const data = await searchMovieApi(searchQuery)
-              setMovies(data.results)
-              if (data.total_results === 0) {
-                return toast.error('No find')
-              }
-            } catch (error) {
-                toast.error('Error')
-            }
-        }
-        getMovies()
+    };
+        seerchMovie()
     }, [searchQuery])
-
+  
     return (
-        <>
+      <main>
         <SearchBar 
-            onSubmit={handleChange} 
-            searchQuery={searchQuery}
+            formSubmit={handleSearchQueryChange}
         />
-        <MoviesList movies={movies}/>
-        </>
+        <MoviesList 
+            movies={recivedMovies} 
+        />
+        {isLoading && <Loader />}
+      </main>
     )
-}
+ }
