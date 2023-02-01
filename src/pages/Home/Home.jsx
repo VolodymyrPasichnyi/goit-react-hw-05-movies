@@ -1,44 +1,38 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { trendingMovieApi } from 'services/moviesApi'
-import { Link, Outlet } from 'react-router-dom'
-import { Suspense } from 'react'
+import { Link } from 'react-router-dom'
 
 
 export const Home = () => {
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
-        trendingMovieApi()
-          .then(response => {
-            if (response.ok) {
-              return response.json()
-            }
-            return Promise.reject(new Error('Not found'))
-          })
-          .then(data => setMovies(data.results))
-          .catch(error => console.log(error))
-    }, [])
-
-    if (!movies) {
-        return 
-    }
+      const trendingMovie = async () => {
+        try {  
+          const data = await trendingMovieApi()
+          setMovies([...data.results])
+        } catch (error) {
+          console.log(error)
+        } 
+      }
+      trendingMovie()
+    },[])
 
     return (
       <>
         <div>
           <h2>Trending Today:</h2>
+          <ul>
           {movies.map(movie => (
             <li key={movie.id}>
               <Link to={`/movies/${movie.id}`}>
-                {movie.title || movie.name}
+                {movie.title}
               </Link>
             </li>
         ))}
+        </ul>
         </div>
-        {/* <Suspense> */}
-          <Outlet/>
-        {/* </Suspense> */}
       </>
     )
 }
