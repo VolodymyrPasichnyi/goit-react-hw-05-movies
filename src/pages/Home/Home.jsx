@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { toast } from "react-hot-toast"
 import { Loader } from 'components/Loader/Loader'
+import css from '../Home/Home.module.css'
 
 
 
@@ -29,7 +30,7 @@ export const Home = () => {
 
     return (
       <>
-        <div>
+        <div className={css.main}>
           <h2>Trending Today:</h2>
           <ul>
           {movies.map(movie => (

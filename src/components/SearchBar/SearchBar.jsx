@@ -1,6 +1,7 @@
 import { useState } from "react"
 import PropTypes from 'prop-types'
 import { toast } from "react-hot-toast"
+import css from '../SearchBar/SearchBar.module.css'
 
 
 const SearchBar = ({ formSubmit }) => {
@@ -21,8 +22,11 @@ const SearchBar = ({ formSubmit }) => {
 
     return (
         <>
-          <form onSubmit={handleSubmit}>
+          <form 
+            className={css.Searchbar}
+            onSubmit={handleSubmit}>
             <input 
+              className={css.SearchForm}
               type="text" 
               value={value}
               onChange={handleInputChange}

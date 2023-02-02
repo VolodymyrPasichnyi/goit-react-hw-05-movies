@@ -36,14 +36,14 @@ searchMovieApi.propTypes = {
 }
 
 detailsMovieApi.propTypes = {
-      movie_id: PropTypes.nubmer.isRequired,
+      movie_id: PropTypes.number.isRequired,
 }
 
 castMovieApi.propTypes = {
-      movie_id: PropTypes.nubmer.isRequired,
+      movie_id: PropTypes.number.isRequired,
 }
 
 castMovieApi.propTypes = {
-      movie_id: PropTypes.nubmer.isRequired,
+      movie_id: PropTypes.number.isRequired,
 }
 
