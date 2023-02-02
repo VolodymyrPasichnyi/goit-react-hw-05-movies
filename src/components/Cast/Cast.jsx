@@ -15,7 +15,7 @@ const Cast = () => {
         const moviesCast = async () => {
             try {
                 setIsLoading(true)
-                const data = await castMovieApi()
+                const data = await castMovieApi(movieId)
                 setCast(data.cast)
             } catch (error) {
                 toast.error(`${error.message}`)
@@ -31,31 +31,27 @@ const Cast = () => {
     }
 
     return (
-      <div>
+      <>
+        {cast.length > 0 ?
         <ul>
-            {cast.map({ id, poster_path, name, character  }) => (
+            {cast.map(({ id, profile_path, original_name, character  }) => (
                 <li key={id}>
                     <img 
-                        src=``
-                        alt={name} 
+                        src={ profile_path
+                            ? `https://image.tmdb.org/t/p/w185/${profile_path}`
+                            : 'Not found'
+                        }
+                        alt={original_name} 
                     />
+                  <p>Name: {original_name}</p>
+                  <p>Character: {character}</p>
                 </li>
-            )}
+            ))} 
         </ul>
-        {/* <ul>
-          {cast.map(({ id, poster_path, name, character } => (
-            <li key={id}>
-                <img 
-                    src={`https://image.tmdb.org/t/p/w154/${poster_path}`}
-                    alt={name}
-                />
-                <p>Name: {name}</p>
-                <p>Character: {character}</p>
-            </li>
-            ))}
-        </ul> */}
+        : <p>Not Found</p>
+        }
         {isLoading && <Loader />}
-      </div>
+      </>
     )
 }
 

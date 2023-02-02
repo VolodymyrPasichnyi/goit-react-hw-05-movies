@@ -13,7 +13,7 @@ export const Layout = () => {
             <StyledLink to='movies' >Movies</StyledLink >
         </nav>
       </header>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<Loader />}>
         <Outlet/>
       </Suspense>
     </>
