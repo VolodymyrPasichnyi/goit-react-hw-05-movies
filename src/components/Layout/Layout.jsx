@@ -1,8 +1,10 @@
+import { Loader } from "components/Loader/Loader"
+import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
 import { StyledLink } from "./Layout.styled"
 
 
-const Layout = () => {
+export const Layout = () => {
     return (
     <>
       <header>
@@ -11,9 +13,9 @@ const Layout = () => {
             <StyledLink to='movies' >Movies</StyledLink >
         </nav>
       </header>
-      <Outlet/>
+      <Suspense fallback={<Loader/>}>
+        <Outlet/>
+      </Suspense>
     </>
     )
 }
-
-export default Layout

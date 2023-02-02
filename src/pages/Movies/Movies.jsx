@@ -1,6 +1,4 @@
-import { MoviesList } from "components/MoviesList/MoviesList"
-import { SearchBar } from "components/SearchBar/SearchBar"
-import { useState } from "react"
+import { lazy, useState } from "react"
 import { useEffect } from "react"
 import { toast } from "react-hot-toast"
 import { useSearchParams } from "react-router-dom"
@@ -8,8 +6,11 @@ import { searchMovieApi } from "services/moviesApi"
 import { Loader } from 'components/Loader/Loader'
 
 
+const MoviesList = lazy(() => import('components/MoviesList/MoviesList'))
+const SearchBar = lazy(() => import('components/SearchBar/SearchBar'))
 
-export const Movies = () => {
+
+const Movies = () => {
     const [recivedMovies, setRecivedMovies] = useState(null)
     const [searchParams, setSearchParams] = useSearchParams()
     const searchQuery = searchParams.get('query') ?? ''
@@ -52,3 +53,6 @@ export const Movies = () => {
       </main>
     )
  }
+
+
+ export default Movies
