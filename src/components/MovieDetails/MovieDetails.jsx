@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { useLocation, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { detailsMovieApi } from "services/moviesApi"
 
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const [movie, setMovie] = useState(null)
     const { movieId } = useParams()
     const location = useLocation()
@@ -30,7 +30,7 @@ export const MovieDetails = () => {
 
     return (
         <>
-        <button to={location.state?.from ?? '/movies'}>Go Back</button>
+        <Link to={location.state?.from ?? '/movies'}>Go Back</Link>
         <div>
             <img src={poster_path} alt={original_title} />
         </div>
@@ -44,3 +44,6 @@ export const MovieDetails = () => {
         </>
     )
 }
+
+
+export default MovieDetails

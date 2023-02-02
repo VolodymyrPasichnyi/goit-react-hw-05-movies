@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import { StyledLink } from "./Layout.styled"
 
 
-export const Layout = () => {
+const Layout = () => {
     return (
     <>
       <header>
@@ -15,3 +15,5 @@ export const Layout = () => {
     </>
     )
 }
+
+export default Layout

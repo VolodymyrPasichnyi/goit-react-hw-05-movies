@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom"
 import { Link } from "react-router-dom"
 import PropTypes from 'prop-types'
 
-export const MoviesList = ({ movies }) => {
+const MoviesList = ({ movies }) => {
     const location = useLocation()
 
     if (!movies) {
@@ -28,3 +28,6 @@ export const MoviesList = ({ movies }) => {
 MoviesList.propTypes = {
   movies: PropTypes.array,
 }
+
+
+export default MoviesList

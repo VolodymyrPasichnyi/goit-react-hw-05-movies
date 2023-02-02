@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { toast } from "react-hot-toast"
 
 
-export const SearchBar = ({ formSubmit }) => {
+const SearchBar = ({ formSubmit }) => {
      const [value, setValue] = useState('')
 
      const handleInputChange = (e) =>{
@@ -37,3 +37,6 @@ export const SearchBar = ({ formSubmit }) => {
 SearchBar.propTypes = {
   formSubmit: PropTypes.func.isRequired,
 }
+
+
+export default SearchBar
