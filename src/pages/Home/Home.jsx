@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react'
+import { lazy, useEffect, useState } from 'react'
 import { trendingMovieApi } from 'services/moviesApi'
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
 import { toast } from "react-hot-toast"
 import { Loader } from 'components/Loader/Loader'
 import css from '../Home/Home.module.css'
 
 
+const MoviesList = lazy(() => import('components/MoviesList/MoviesList'))
+
 
 export const Home = () => {
-    const [movies, setMovies] = useState([])
-    const location = useLocation()
+    const [movies, setMovies] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
@@ -32,15 +31,9 @@ export const Home = () => {
       <>
         <div className={css.main}>
           <h2>Trending Today:</h2>
-          <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {movie.title}
-              </Link>
-            </li>
-        ))}
-        </ul>
+          <MoviesList 
+            movies={movies}
+          />
         {isLoading && <Loader />}
         </div>
       </>

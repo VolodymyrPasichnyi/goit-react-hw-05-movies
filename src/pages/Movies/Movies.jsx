@@ -7,7 +7,6 @@ import { Loader } from 'components/Loader/Loader'
 import css from '../Movies/Movies.module.css'
 
 
-
 const MoviesList = lazy(() => import('components/MoviesList/MoviesList'))
 const SearchBar = lazy(() => import('components/SearchBar/SearchBar'))
 
